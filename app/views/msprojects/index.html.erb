@@ -1,1 +1,7 @@
-<h2>Msprojects#index</h2>
+<h2><%= l(:msproject) %></h2>
+
+<% form_for :ms_project, :url => {:action => 'index', :project_id => @project_id }, :html => { :multipart => true } do |f| %>
+<%= file_field :file, :msproject %>
+<%= submit_tag l(:button_save) %>
+
+<% end %>
