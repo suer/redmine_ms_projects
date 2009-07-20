@@ -1,0 +1,2 @@
+module MsprojectsHelper
+end
