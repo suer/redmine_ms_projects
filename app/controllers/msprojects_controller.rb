@@ -5,14 +5,13 @@ class MsprojectsController < ApplicationController
   include MsprojectsHelper
   
   def index
-    @project_id = params[:project_id]
-    @project = Project.find @project_id
-    @xml = ""
+    xml = ""
     tracker = Tracker.find 1
+    @added_tasks = []
     if request.post?
-      @xml = params[:file][:msproject].read
-      tasks = parse_ms_project(@xml)
-      tasks.each do |t|
+      xml = params[:file][:msproject].read
+      @tasks = parse_ms_project(xml)
+      @tasks.each do |t|
         param = {
           :subject => t.name
         }
@@ -20,7 +19,11 @@ class MsprojectsController < ApplicationController
         issue.project = @project
         issue.tracker = tracker
         issue.author = User.current
-        issue.save!
+        issue.start_date = t.start_date
+        issue.due_date = t.finish_date
+        issue.created_on = t.create_date
+        issue.updated_on = t.create_date
+        @added_tasks << t if issue.save
       end
     end
     
