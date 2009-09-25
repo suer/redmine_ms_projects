@@ -21,9 +21,9 @@ class MsprojectsController < ApplicationController
         issue.author = User.current
         issue.start_date = t.start_date
         issue.due_date = t.finish_date
-        issue.created_on = t.create_date
         issue.updated_on = t.create_date
         @added_tasks << t if issue.save
+        issue.created_on = t.create_date
       end
     end
     
