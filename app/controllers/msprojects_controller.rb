@@ -1,4 +1,5 @@
 class MsprojectsController < ApplicationController
+  unloadable
   before_filter :find_project, :authorize, :only => :index
 
   helper :msprojects
