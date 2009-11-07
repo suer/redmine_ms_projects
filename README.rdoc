@@ -1,12 +1,12 @@
 = MS Project Importer for Redmine
-* Requirement 
+== Requirement 
 You need any environments that Redmine work on.
 
-* Installation
+== Installation
 1. $ cd REDMINE_ROOT
 2. $ ruby script/plugin install git://github.com/suer/redmine_ms_projects.git
 
-* Usage
+== Usage
 1. save a MS Project file (.msp) as an xml file(.xml) with MS Project
 2. access your a redmine project, then click "MS Project" tab
 3. select xml file, and click save button
