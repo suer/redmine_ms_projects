@@ -7,13 +7,15 @@
 <table class="list">
   <tr>
   <th><%= l :title %></th>
+  <th><%= l :tracker %></th>
   <th><%= l :start_date %></th>
   <th><%= l :finish_date %></th>
   <th><%= l :create_date %></th>
   </tr>
   <% @added_tasks.each_with_index do |task, i| %>
   <tr>
-  <td><%= link_to task.subject, {:controller => 'issues', :action => 'show', :id => task.id} %></td>
+  <td><%= link_to task.subject, {:controller => 'issues', :action => 'show', :id => task.id}, :name => 'trackers[]' %></td>
+  <td><%= task.tracker.name %></td>
   <td><%= task.start_date %></td>
   <td><%= task.due_date %></td>
   <td><%= task.created_on %></td>

@@ -6,6 +6,7 @@
   <tr>
   <th>&nbsp;</th>
   <th><%= l :title %></th>
+  <th><%= l :tracker %></th>
   <th><%= l :start_date %></th>
   <th><%= l :finish_date %></th>
   <th><%= l :create_date %></th>
@@ -14,6 +15,7 @@
   <tr>
   <td><%= check_box_tag 'checked_items[]', i %></td>
   <td><%= task.name %></td>
+  <td><%= select_tag 'trackers[]', options_for_select(@trackers.collect {|t| [t.name, t.id]})%></td>
   <td><%= task.start_date %></td>
   <td><%= task.finish_date %></td>
   <td><%= task.create_date %></td>

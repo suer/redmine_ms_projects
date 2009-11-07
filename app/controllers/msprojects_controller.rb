@@ -1,7 +1,6 @@
 class MsprojectsController < ApplicationController
   unloadable
   before_filter :find_project, :only => [:index, :select, :add]
-  #before_filter :find_project, :only => [:select, :add]
 
   helper :msprojects
   include MsprojectsHelper
@@ -15,6 +14,7 @@ class MsprojectsController < ApplicationController
   def select
     xml = params[:file][:msproject].read
     @tasks = parse_ms_project(xml)
+    @trackers = @project.trackers
     session[:tasks] = @tasks
   end
 
@@ -24,14 +24,15 @@ class MsprojectsController < ApplicationController
     params[:checked_items].each do |i|
       @tasks << session[:tasks][i.to_i]
     end
-    tracker = Tracker.find 1
-    @tasks.each do |t|
+    #tracker = Tracker.find 1
+    @tasks.each_with_index do |t, i|
       param = {
         :subject => t.name
       }
       issue = Issue.new param
       issue.project = @project
-      issue.tracker = tracker
+      #issue.tracker = tracker
+      issue.tracker_id = params[:trackers][params[:checked_items][i].to_i]
       issue.author = User.current
       issue.start_date = t.start_date
       issue.due_date = t.finish_date
