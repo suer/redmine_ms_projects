@@ -13,10 +13,10 @@
   </tr>
   <% @added_tasks.each_with_index do |task, i| %>
   <tr>
-  <td><%= task.name %></td>
+  <td><%= link_to task.subject, {:controller => 'issues', :action => 'show', :id => task.id} %></td>
   <td><%= task.start_date %></td>
-  <td><%= task.finish_date %></td>
-  <td><%= task.create_date %></td>
+  <td><%= task.due_date %></td>
+  <td><%= task.created_on %></td>
   </tr>
   <% end %>
 </table>
