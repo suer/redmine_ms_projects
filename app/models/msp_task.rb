@@ -1,4 +1,4 @@
-class Task
+class MspTask
   attr_accessor :name
   attr_accessor :start_date
   attr_accessor :finish_date

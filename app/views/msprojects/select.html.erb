@@ -1,0 +1,29 @@
+<% if @tasks.size > 0 %>
+
+<div style="clear: both;"/>
+<% form_for :ms_project, :url => {:action => 'add', :project_id => @project } do %>
+<table class="list">
+  <tr>
+  <th>&nbsp;</th>
+  <th><%= l :title %></th>
+  <th><%= l :start_date %></th>
+  <th><%= l :finish_date %></th>
+  <th><%= l :create_date %></th>
+  </tr>
+  <% @tasks.each_with_index do |task, i| %>
+  <tr>
+  <td><%= check_box_tag 'checked_items[]', i %></td>
+  <td><%= task.name %></td>
+  <td><%= task.start_date %></td>
+  <td><%= task.finish_date %></td>
+  <td><%= task.create_date %></td>
+  </tr>
+  <% end %>
+</table>
+<div class="contextual">
+  <%= submit_tag l(:button_save), :name => 'save' %>
+</div>
+<% end %>
+<% end %>
+
+

@@ -1,0 +1,24 @@
+<%= l(:msp_read_message, @added_tasks.size) %> 
+
+<div style="clear: both;"/>
+<br/>
+<br/>
+<br/>
+<table class="list">
+  <tr>
+  <th><%= l :title %></th>
+  <th><%= l :start_date %></th>
+  <th><%= l :finish_date %></th>
+  <th><%= l :create_date %></th>
+  </tr>
+  <% @added_tasks.each_with_index do |task, i| %>
+  <tr>
+  <td><%= task.name %></td>
+  <td><%= task.start_date %></td>
+  <td><%= task.finish_date %></td>
+  <td><%= task.create_date %></td>
+  </tr>
+  <% end %>
+</table>
+
+

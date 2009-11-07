@@ -7,6 +7,6 @@ Redmine::Plugin.register :redmine_ms_projects do
   version '0.0.1'
 
   permission :msprojects, {:msprojects => [:index]}, :public => true
-  menu :project_menu, :msprojects, { :controller => 'msprojects', :action => 'index' }, :caption => :msprojects, :last => true, :param => :project_id
+  menu :project_menu, :msprojects, { :controller => 'msprojects', :action => 'index' }, :caption => :msproject, :last => true, :param => :project_id
 
 end
