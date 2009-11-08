@@ -4,7 +4,12 @@
 <% form_for :ms_project, :url => {:action => 'add', :project_id => @project } do %>
 <table class="list">
   <tr>
-  <th>&nbsp;</th>
+  <th><%= link_to image_tag('toggle_check.png'), 
+          {}, 
+          :onclick => "toggleCheckboxesBySelector('input'); return false;",
+          :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" 
+        %>
+  </th>
   <th><%= l :title %></th>
   <th><%= l :tracker %></th>
   <th><%= l :start_date %></th>
@@ -13,7 +18,7 @@
   </tr>
   <% @tasks.each_with_index do |task, i| %>
   <tr>
-  <td><%= check_box_tag 'checked_items[]', i %></td>
+  <td><%= check_box_tag 'checked_items[]', i, :class => 'task_check_box' %></td>
   <td><%= task.name %></td>
   <td><%= select_tag 'trackers[]', options_for_select(@trackers.collect {|t| [t.name, t.id]})%></td>
   <td><%= task.start_date %></td>
