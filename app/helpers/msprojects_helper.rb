@@ -21,4 +21,18 @@ module MsprojectsHelper
     tasks
   end
 
+  def find_resources xml
+    resources = []
+    doc = REXML::Document.new xml 
+    doc.elements.each('//Resource') do |resource_tag|
+      resource = MspResource.new
+      id = resource_tag.elements['ID']
+      resource.id = id if id
+      name = resource_tag.elements['Name']
+      resource.name = name.text if name
+      resources << resource
+    end
+    resources
+  end
+
 end

@@ -14,6 +14,8 @@ class MsprojectsController < ApplicationController
   def select
     xml = params[:file][:msproject].read
     @tasks = parse_ms_project(xml)
+    @resources = find_resources(xml)
+    @members = Member.find(:all, params[:project_id]).collect {|m| User.find_by_id m.user_id }
     @trackers = @project.trackers
     session[:tasks] = @tasks
   end
@@ -31,7 +33,6 @@ class MsprojectsController < ApplicationController
       }
       issue = Issue.new param
       issue.project = @project
-      #issue.tracker = tracker
       issue.tracker_id = params[:trackers][params[:checked_items][i].to_i]
       issue.author = User.current
       issue.start_date = t.start_date

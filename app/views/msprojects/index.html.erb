@@ -1,6 +1,6 @@
 <h2><%= l(:msproject) %></h2>
 
-<% form_for :ms_project, :url => {:action => 'select', :project_id => @project }, :html => { :multipart => true } do |f| %>
+<% form_for :ms_project, :url => {:action => 'select', :project_id => @project }, :method => :post, :html => { :multipart => true } do |f| %>
 <%= file_field :file, :msproject %>
 <%= submit_tag l(:button_read), :name => 'read' %>
 <% end %>
