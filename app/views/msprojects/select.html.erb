@@ -1,5 +1,31 @@
+<% if @resources.size > 0 %>
+<div style="width: 50%;">
+<table class="list">
+<tr>
+  <th>MSP Resource</th>
+  <th>Redmine Account</th>
+</tr>
+<% @resources.each do |resource| %>
+<% next if resource.blank? or resource.name.blank? %>
+<tr>
+  <td style="text-align: center;"><%= resource.name %></td>
+  <td style="text-align: center;">
+    <%= select_tag  'msp_members[]', "<option value=''></option>" + options_for_select(@members.collect {|m| [m.name, m.id]})
+    %>
+  </td>
+</tr>
+<% end %>
+</table>
+<div class="contextual">
+  <input type="button" name="assign" value="assign" onclick="return false;"/>
+</div>
+</div>
+<% end %>
+<br/>
+<br/>
 <% if @tasks.size > 0 %>
-
+<br/>
+<br/>
 <div style="clear: both;"/>
 <% form_for :ms_project, :url => {:action => 'add', :project_id => @project } do %>
 <table class="list">
@@ -12,6 +38,7 @@
   </th>
   <th><%= l :title %></th>
   <th><%= l :tracker %></th>
+  <th><%= l :assign %></th>
   <th><%= l :start_date %></th>
   <th><%= l :finish_date %></th>
   <th><%= l :create_date %></th>
@@ -21,6 +48,7 @@
   <td><%= check_box_tag 'checked_items[]', i, :class => 'task_check_box' %></td>
   <td><%= task.name %></td>
   <td><%= select_tag 'trackers[]', options_for_select(@trackers.collect {|t| [t.name, t.id]})%></td>
+  <td><%= select_tag 'assigns[]', "<option value=''></option>" + options_for_select(@members.collect {|m| [m.name, m.id]}) %></td>
   <td><%= task.start_date %></td>
   <td><%= task.finish_date %></td>
   <td><%= task.create_date %></td>
@@ -33,4 +61,10 @@
 <% end %>
 <% end %>
 
-
+<script type="text/javascript">
+<!--
+function select_all_asignee() {
+  $$('select#assigns[]');
+}
+// -->
+</script>
