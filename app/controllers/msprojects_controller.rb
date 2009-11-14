@@ -15,6 +15,7 @@ class MsprojectsController < ApplicationController
     xml = params[:file][:msproject].read
     @tasks = parse_ms_project(xml)
     @resources = find_resources(xml)
+    params[:file][:msproject].close
     @members = Member.find(:all, params[:project_id]).collect {|m| User.find_by_id m.user_id }
     @trackers = @project.trackers
     session[:tasks] = @tasks

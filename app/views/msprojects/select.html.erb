@@ -1,28 +1,6 @@
-<% if @resources.size > 0 %>
-<div style="width: 50%;">
-<table class="list">
-<tr>
-  <th>MSP Resource</th>
-  <th>Redmine Account</th>
-</tr>
-<% @resources.each do |resource| %>
-<% next if resource.blank? or resource.name.blank? %>
-<tr>
-  <td style="text-align: center;"><%= resource.name %></td>
-  <td style="text-align: center;">
-    <%= select_tag  'msp_members[]', "<option value=''></option>" + options_for_select(@members.collect {|m| [m.name, m.id]})
-    %>
-  </td>
-</tr>
-<% end %>
-</table>
-<div class="contextual">
-  <input type="button" name="assign" value="assign" onclick="return false;"/>
-</div>
-</div>
-<% end %>
 <br/>
 <br/>
+
 <% if @tasks.size > 0 %>
 <br/>
 <br/>
