@@ -39,6 +39,7 @@ class MsprojectsController < ApplicationController
       issue.updated_on = t.create_date
       @added_tasks << issue if issue.save
       issue.created_on = t.create_date
+      flash[:notice] = l(:msp_read_message, @added_tasks.size)
     end
   end
 
