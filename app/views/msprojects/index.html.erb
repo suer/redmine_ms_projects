@@ -2,7 +2,7 @@
 
 <% form_for :ms_project, :url => {:action => 'select', :project_id => @project }, :html => { :multipart => true } do |f| %>
 <%= file_field :file, :msproject %>
-<%= submit_tag l(:button_read), :name => 'read' %>
+<%= submit_tag l(:button_read), :name => 'read', :onclick => "javascript: $('ajax-indicator').style.display = 'block';" %>
 <% end %>
 
 <% if @added_tasks.size > 0 %>
