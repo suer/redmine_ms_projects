@@ -8,3 +8,4 @@ button_read: 読み込み
 assign: 割当て
 resource: リソース
 msp_read_message: %d 件追加しました
+msp_update_message: %d 件更新しました

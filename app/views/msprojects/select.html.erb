@@ -17,6 +17,7 @@
   <th><%= l :title %></th>
   <th><%= l :tracker %></th>
   <th><%= l :assign %></th>
+  <th><%= l :new_task %></th>
   <th><%= l :start_date %></th>
   <th><%= l :finish_date %></th>
   <th><%= l :create_date %></th>
@@ -27,6 +28,7 @@
   <td><%= task.name %></td>
   <td><%= select_tag 'trackers[]', options_for_select(@trackers.collect {|t| [t.name, t.id]})%></td>
   <td><%= select_tag 'assigns[]', "<option value=''></option>" + options_for_select(@members.collect {|m| [m.name, m.id]}) %></td>
+  <td><%= task.create? %></td>
   <td><%= task.start_date %></td>
   <td><%= task.finish_date %></td>
   <td><%= task.create_date %></td>
