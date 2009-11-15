@@ -13,8 +13,21 @@ class MsprojectsController < ApplicationController
   end
 
   def select
-    xml = params[:file][:msproject].read
-    @tasks = parse_ms_project(xml, @issues)
+    begin
+      xml = params[:file][:msproject].read 
+    rescue Exception => ex
+      flash[:error] = l(:file_read_error)
+      redirect_to :action => index, :project_id => @project.identifier
+      return
+    end
+
+    begin
+      @tasks = parse_ms_project(xml, @issues)
+    rescue Exception => ex
+      flash[:error] = l(:file_read_error)
+      redirect_to :action => index, :project_id => @project.identifier
+      return
+    end
     @resources = find_resources(xml)
     params[:file][:msproject].close
     @members = Member.find(:all, params[:project_id]).collect {|m| User.find_by_id m.user_id }

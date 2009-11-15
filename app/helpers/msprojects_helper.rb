@@ -20,7 +20,8 @@ module MsprojectsHelper
       tasks << task
     end
     tasks
-  end
+  end rescue raise 'parse error'
+
 
   def find_resources xml
     resources = []
