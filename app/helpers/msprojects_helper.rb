@@ -6,6 +6,10 @@ module MsprojectsHelper
     doc = REXML::Document.new xml 
     doc.elements.each('//Task') do |task_tag|
       task = MspTask.new
+      task.task_id = task_tag.elements['ID'].text
+      task.wbs = task_tag.elements['WBS'].text
+      task.outline_number = task_tag.elements['OutlineNumber'].text
+      task.outline_level = task_tag.elements['OutlineLevel'].text.to_i
       name = task_tag.elements['Name']
       task.name = name.text if name
       date = Date.new

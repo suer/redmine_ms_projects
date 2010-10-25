@@ -1,3 +1,7 @@
+<% content_for :header_tags do %>
+    <%= stylesheet_link_tag 'application', :plugin => 'redmine_ms_projects' %>
+<% end %>
+
 <br/>
 <br/>
 
@@ -24,8 +28,8 @@
   </tr>
   <% @tasks.each_with_index do |task, i| %>
   <tr>
-  <td><%= check_box_tag 'checked_items[]', i, :class => 'task_check_box' %></td>
-  <td><%= task.name %></td>
+  <td><%= check_box_tag 'checked_items[]', task.task_id, :class => 'task_check_box' %></td>
+  <td><span class="msp-level<%= task.outline_level %>"><%= task.name %></span></td>
   <td><%= select_tag 'trackers[]', options_for_select(@trackers.collect {|t| [t.name, t.id]})%></td>
   <td><%= select_tag 'assigns[]', "<option value=''></option>" + options_for_select(@members.collect {|m| [m.name, m.id]}) %></td>
   <td><%= task.create? %></td>
