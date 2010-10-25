@@ -37,7 +37,6 @@ class MsprojectsController < ApplicationController
     params[:file][:msproject].close
     @members = Member.find(:all, params[:project_id]).collect {|m| User.find_by_id m.user_id }
     @trackers = @project.trackers
-    #session[:tasks] = @tasks
     session[:msp_tmp_filename] = params[:file][:msproject].original_filename
   end
 
@@ -67,6 +66,10 @@ class MsprojectsController < ApplicationController
       end
       issue.project = @project
       issue.tracker_id = params[:trackers][params[:checked_items][i].to_i]
+      assigned_id = params[:assigns][params[:checked_items][i].to_i]
+      unless assigned_id.blank?
+        issue.assigned_to_id = params[:assigns][params[:checked_items][i].to_i]
+      end
       issue.author = User.current
       issue.start_date = t.start_date
       issue.due_date = t.finish_date
@@ -76,7 +79,6 @@ class MsprojectsController < ApplicationController
       unless parent.nil?
         issue.parent_issue_id = parent.id
       end
-      logger.info "====================== hoge ================="
       if t.create? and issue.save
         @added_tasks << issue 
         @saved_task_table[t.outline_number] = issue
@@ -113,7 +115,6 @@ class MsprojectsController < ApplicationController
     parent_task = nil
     @saved_task_table.each do |number, issue|
       if parent_number == number
-        logger.info "#{issue.subject} > #{task.name}"
         return issue
       end
     end

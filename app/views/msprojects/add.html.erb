@@ -3,42 +3,57 @@
 <br/>
 <br/>
 <br/>
-<table class="list">
+<h3><%= l(:new_task) %></h3>
+<% if @added_tasks.any? %>
+  <table class="list">
   <tr>
-  <th><%= l :title %></th>
-  <th><%= l :tracker %></th>
-  <th><%= l :start_date %></th>
-  <th><%= l :finish_date %></th>
-  <th><%= l :create_date %></th>
+    <th><%= l :title %></th>
+    <th><%= l :tracker %></th>
+    <th><%= l :assign %></th>
+    <th><%= l :start_date %></th>
+    <th><%= l :finish_date %></th>
+    <th><%= l :create_date %></th>
   </tr>
-  <% @added_tasks.each_with_index do |task, i| %>
-  <tr>
-  <td><%= link_to task.subject, {:controller => 'issues', :action => 'show', :id => task.id}, :name => 'trackers[]' %></td>
-  <td><%= task.tracker.name %></td>
-  <td><%= task.start_date %></td>
-  <td><%= task.due_date %></td>
-  <td><%= task.created_on %></td>
-  </tr>
-  <% end %>
-</table>
+    <% @added_tasks.each_with_index do |task, i| %>
+    <tr>
+      <td><%= link_to task.subject, {:controller => 'issues', :action => 'show', :id => task.id}, :name => 'trackers[]' %></td>
+      <td><%= task.tracker.name %></td>
+      <td class="assigned-to"><%= task.assigned_to ? link_to_user(task.assigned_to) : '-' %></td>
+      <td><%= task.start_date %></td>
+      <td><%= task.due_date %></td>
+      <td><%= task.created_on %></td>
+    </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
 
-<table class="list">
-  <tr>
-  <th><%= l :title %></th>
-  <th><%= l :tracker %></th>
-  <th><%= l :start_date %></th>
-  <th><%= l :finish_date %></th>
-  <th><%= l :create_date %></th>
-  </tr>
-  <% @updated_tasks.each_with_index do |task, i| %>
-  <tr>
-  <td><%= link_to task.subject, {:controller => 'issues', :action => 'show', :id => task.id}, :name => 'trackers[]' %></td>
-  <td><%= task.tracker.name %></td>
-  <td><%= task.start_date %></td>
-  <td><%= task.due_date %></td>
-  <td><%= task.created_on %></td>
-  </tr>
-  <% end %>
-</table>
+<h3><%= l(:modified_task) %></h3>
+<% if @updated_tasks.any? %>
+  <table class="list">
+    <tr>
+    <th><%= l :title %></th>
+    <th><%= l :tracker %></th>
+    <th><%= l :assign %></th>
+    <th><%= l :start_date %></th>
+    <th><%= l :finish_date %></th>
+    <th><%= l :create_date %></th>
+    </tr>
+    <% @updated_tasks.each_with_index do |task, i| %>
+    <tr>
+    <td><%= link_to task.subject, {:controller => 'issues', :action => 'show', :id => task.id}, :name => 'trackers[]' %></td>
+    <td><%= task.tracker.name %></td>
+    <td class="assigned-to"><%= task.assigned_to ? link_to_user(task.assigned_to) : '-' %></td>
+    <td><%= task.start_date %></td>
+    <td><%= task.due_date %></td>
+    <td><%= task.created_on %></td>
+    </tr>
+    <% end %>
+  </table>
+<% else %>
+  <p class="nodata"><%= l(:label_no_data) %></p>
+<% end %>
+
 
 

@@ -1,2 +1,15 @@
-# English strings go here
-my_label: "My label"
+en: 
+  msproject: MS Project
+  title: Subject
+  tracker: Tracker
+  start_date: Start
+  finish_date: Due Date
+  create_date: Updated
+  button_read: Upload
+  assign: Assigned to
+  resource: Resource
+  msp_read_message: "Added: %d issues"
+  msp_update_message: "Updated: %d issues"
+  file_read_error: Error
+  new_task: New Tickets
+  modified_task: Modified Tickets
